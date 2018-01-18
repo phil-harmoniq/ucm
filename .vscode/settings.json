@@ -7,5 +7,11 @@
         "**/.DS_Store": true,
         "**/.mypy_cache": true,
         "**/__pycache__": true
-    }
+    },
+	"python.linting.mypyArgs": [
+		"--follow-imports=silent",
+		"--check-untyped-defs",
+		"--strict"
+    ],
+    "python.pythonPath": "/usr/local/bin/python3"
 }
