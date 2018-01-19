@@ -15,10 +15,7 @@
             "console": "externalTerminal",
             "env": {},
             "envFile": "${workspaceFolder}/.env",
-            "debugOptions": [],
-            "args": [
-                "install"
-            ]
+            "debugOptions": []
         }
     ]
 }

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-UCM_DIR="$(dirname "$(readlink "$0")")"
+UCM_DIR="$(cd "$(dirname "$0")" && pwd)"
 exec -a UCM python3 "$UCM_DIR/src" "$@"
