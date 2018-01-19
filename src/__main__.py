@@ -1,21 +1,25 @@
 import sys
 from typing import List
 import printer
-from app_info import APP_NAME, APP_VERSION
 import installer
 
 
-def main(app_name: str, app_version: str, args: List[str]) -> None:
-    printer.say_hello(app_name, app_version)
-    cli_args = args
-    parse_args(cli_args)
+def main(args: List[str]) -> None:
+    printer.say_hello()
+    parse_args(args)
+    printer.say_bye()
 
 
 def parse_args(args: List[str]) -> None:
-    if args[1] == "install":
-        installer.add_ucm_symlink()
+    if len(args) > 1:
+        if args[1] == "install":
+            installer.install_launch_script()
+        elif args[1] == "remove":
+            installer.remove_launch_script()
+        else:
+            raise ValueError()
     else:
-        raise ValueError()
+        return
 
 
-main(APP_NAME, APP_VERSION, sys.argv)
+main(sys.argv)

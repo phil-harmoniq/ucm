@@ -1,15 +1,33 @@
 import os
 import subprocess
-from app_info import APP_INSTALL_DIR
+from __init__ import SOURCE_DIR, LAUNCH_FILE
 
 
-def add_ucm_symlink() -> None:
-    symlink_already_exists()
+LAUNCH_STRING = ('#!/usr/bin/env bash\n'
+                 '\n'
+                 f'UCM_DIR={SOURCE_DIR}\n'
+                 'exec -a UCM python3 "$UCM_DIR" "$@"\n')
 
 
-def symlink_already_exists() -> None:
-    if os.path.isfile(f"{APP_INSTALL_DIR}/ucm"):
+def install_launch_script() -> None:
+    if symlink_already_exists():
         print("UCM is already installed.")
     else:
-        print("Installing...")
-        subprocess.call(["ln", "-s", f"{os.environ['UCM_DIR']}/ucm", APP_INSTALL_DIR])
+        print("Installing launch script...")
+        with open(LAUNCH_FILE, "w") as launcher:
+            launcher.write(LAUNCH_STRING)
+        subprocess.call(["chmod", "a+x", LAUNCH_FILE])
+
+
+def remove_launch_script() -> None:
+    if symlink_already_exists():
+        print("Removing launch script...")
+        os.remove(LAUNCH_FILE)
+    else:
+        print("UCM isn't currently installed.")
+
+
+def symlink_already_exists() -> bool:
+    if os.path.isfile(LAUNCH_FILE):
+        return True
+    return False

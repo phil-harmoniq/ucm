@@ -62,3 +62,6 @@ target/
 
 # Mac Finder options
 .DS_Store
+
+# Rope formatter
+.ropeproject

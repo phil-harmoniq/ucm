@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-export UCM_DIR=$(cd "$(dirname "$0")" || exit; pwd)
+UCM_DIR="$(dirname "$(readlink "$0")")"
 exec -a UCM python3 "$UCM_DIR/src" "$@"
